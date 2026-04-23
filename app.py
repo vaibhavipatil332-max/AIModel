@@ -2,9 +2,8 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-# Load model
+# Load ONLY pipeline model
 model = joblib.load("model.pkl")
-preprocessor = joblib.load("preprocessor.pkl")
 
 # Page config
 st.set_page_config(page_title="Crime Prediction", layout="centered")
@@ -51,8 +50,9 @@ input_data = pd.DataFrame({
 
 # Predict button
 if st.button("🔍 Predict Crime Type"):
-    input_processed = preprocessor.transform(input_data)
-    proba = model.predict_proba(input_processed)
+
+    # ✅ Pipeline handles preprocessing
+    proba = model.predict_proba(input_data)
     score = proba[0][1]
 
     st.markdown("---")
