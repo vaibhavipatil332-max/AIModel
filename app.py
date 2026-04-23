@@ -29,24 +29,29 @@ weapon = st.text_input("🔪 Weapon Used")
 
 st.markdown("---")
 
-# Prepare input
-input_data = pd.DataFrame({
-    'City': [city],
-    'Victim Age': [victim_age],
-    'Victim Gender': [victim_gender],
-    'Weapon Used': [weapon],
-    'Police Deployed': [police],
-    'Reported_DayOfWeek': [1],
-    'Reported_Month': [1],
-    'Reported_Year': [2024],
-    'Occurred_DayOfWeek': [1],
-    'Occurred_Month': [1],
-    'Occurred_Year': [2024],
-    'Time_Of_Occurrence_Minutes': [600],
-    'Crime Code': [101],
-    'Case Closed': ['No'],
-    'Date Case Closed': ['01-01-2024']
-})
+input_data = pd.DataFrame([[
+    city,                    # City
+    101,                     # Crime Code
+    victim_age,              # Victim Age
+    victim_gender,           # Victim Gender
+    weapon,                  # Weapon Used
+    police,                  # Police Deployed
+    'No',                    # Case Closed
+    '2024-01-01',            # Date Case Closed (IMPORTANT format)
+    1,                       # Reported_DayOfWeek
+    1,                       # Reported_Month
+    2024,                    # Reported_Year
+    1,                       # Occurred_DayOfWeek
+    1,                       # Occurred_Month
+    2024,                    # Occurred_Year
+    600                      # Time_Of_Occurrence_Minutes
+]], columns=[
+    'City', 'Crime Code', 'Victim Age', 'Victim Gender', 'Weapon Used',
+    'Police Deployed', 'Case Closed', 'Date Case Closed',
+    'Reported_DayOfWeek', 'Reported_Month', 'Reported_Year',
+    'Occurred_DayOfWeek', 'Occurred_Month', 'Occurred_Year',
+    'Time_Of_Occurrence_Minutes'
+])
 
 # Predict button
 if st.button("🔍 Predict Crime Type"):
