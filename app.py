@@ -57,6 +57,7 @@ if st.button("🔍 Predict Crime Type"):
 
     if city == "" or weapon == "":
         st.warning("⚠️ Please fill all fields")
+
     else:
         proba = model.predict_proba(input_data)
         score = proba[0][1]
@@ -72,5 +73,3 @@ if st.button("🔍 Predict Crime Type"):
             st.warning("🟡 Medium Risk Crime")
         else:
             st.error("🔴 High Risk Violent Crime")
-    else:
-        st.error("🔴 High Risk Violent Crime")
