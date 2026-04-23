@@ -53,21 +53,24 @@ input_data = pd.DataFrame([[
     'Time_Of_Occurrence_Minutes'
 ])
 
-# Predict button
 if st.button("🔍 Predict Crime Type"):
 
-    # ✅ Pipeline handles preprocessing
-    proba = model.predict_proba(input_data)
-    score = proba[0][1]
+    if city == "" or weapon == "":
+        st.warning("⚠️ Please fill all fields")
+    else:
+        proba = model.predict_proba(input_data)
+        score = proba[0][1]
 
-    st.markdown("---")
-    st.subheader("📊 Prediction Result")
+        st.markdown("---")
+        st.subheader("📊 Prediction Result")
 
-    st.write("🔢 Violence Probability:", round(score, 3))
+        st.write("🔢 Violence Probability:", round(score, 3))
 
-    if score < 0.3:
-        st.success("🟢 Low Risk Crime")
-    elif score < 0.6:
-        st.warning("🟡 Medium Risk Crime")
+        if score < 0.3:
+            st.success("🟢 Low Risk Crime")
+        elif score < 0.6:
+            st.warning("🟡 Medium Risk Crime")
+        else:
+            st.error("🔴 High Risk Violent Crime")
     else:
         st.error("🔴 High Risk Violent Crime")
